@@ -211,45 +211,49 @@ cv2.destroyAllWindows()
 
 
 # practical no. 5 : Image Annotation – Drawing lines, text circle, rectangle, ellipse on images
-
-import cv2
 import numpy as np
-from google.colab.patches import cv2_imshow  # Colab-compatible image display
+import pandas as pd
+import matplotlib.pyplot as plt
+import cv2
+from google.colab.patches import cv2_imshow
 
-# Load image
-img = cv2.imread('img.png')
+img = cv2.imread("/coantent/dog.jpeg")
 
-# Drawing functions
-def draw_line(img, pt1, pt2, color, thickness):
-    cv2.line(img, pt1, pt2, color, thickness)
-
-def draw_text(img, text, pt, color, thickness):
-    cv2.putText(img, text, pt, cv2.FONT_HERSHEY_SIMPLEX, 1, color, thickness)
-
-def draw_circle(img, center, radius, color, thickness):
-    cv2.circle(img, center, radius, color, thickness)
-
-def draw_rectangle(img, pt1, pt2, color, thickness):
-    cv2.rectangle(img, pt1, pt2, color, thickness)
-
-def draw_ellipse(img, center, axes, angle, color, thickness):
-    cv2.ellipse(img, center, axes, angle, 0, 360, color, thickness)
-
-# Annotate image
-draw_line(img, (100, 100), (200, 200), (255, 0, 0), 2)  # Blue line
-draw_text(img, 'Hello', (50, 50), (0, 255, 0), 2)        # Green text
-draw_circle(img, (300, 300), 50, (0, 0, 255), 2)         # Red circle
-draw_rectangle(img, (400, 100), (500, 200), (255, 255, 0), 2)  # Yellow rectangle
-draw_ellipse(img, (200, 400), (50, 100), 45, (0, 255, 255), 2)  # Cyan ellipse
-
-# Display annotated image
 cv2_imshow(img)
 
-# Save annotated image
-cv2.imwrite('annotated_image.jpg', img)
+def draw_line(img,pt1,pt2,color,thickness):
+  cv2.line(img,pt1,pt2,color,thickness)
 
-# Release resources
+def draw_text(img,text,pt,color,thickness):
+  cv2.putText(img,text,pt,cv2.FONT_HERSHEY_SIMPLEX,1,color,thickness)
+
+def draw_rectangle(img,pt1,pt2,color,thickness):
+  cv2.rectangle(img,pt1,pt2,color,thickness)
+
+def draw_circle(img,center,radius,color,thickness):
+  cv2.circle(img,center,radius,color,thickness)
+
+def draw_ellipse(img,center,axes,angle,color,thickness):
+  cv2.ellipse(img,center,axes,angle,0,360,color,thickness)
+
+img_copy = img.copy()
+
+cv2.line(img_copy,(0,0),(100,100),(255,0,0),5)
+
+draw_text(img_copy,("hello"),(100,100),(255,0,0),2)
+
+draw_circle(img_copy,(100,100),50,(255,0,0),2)
+
+draw_rectangle(img_copy,(100,100),(200,200),(255,0,0),2)
+
+draw_ellipse(img_copy,(100,100),(50,50),0,(255,0,0),2)
+
+plt.imshow(img_copy)
+cv2.waitKey(0)
+
 cv2.destroyAllWindows()
+
+
 
 
 # practical no. 6 : create a basic game where the player can move the characterr using arrow keys or WASD use unity
